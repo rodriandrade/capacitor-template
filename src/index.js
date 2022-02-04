@@ -1,5 +1,6 @@
 import "@capacitor/core";
 import { Camera, CameraResultType } from '@capacitor/camera';
+import { Device } from '@capacitor/device';
 
 /* IMPORTANTE ----
 
@@ -16,9 +17,19 @@ let ejemplo;
 
 window.onload = start;
 
+async function getDeviceInfo() {
+    let info = await Device.getInfo();
+    return info;
+};
+
 function start() {
     // Iniciar app, asignar elementos necesarios desde el inicio del HTML para guardar en variables.
     //ejemplo = document.getElementById("aca va el ID")
+
+    // EJEMPLO
+    getDeviceInfo().then(info => {
+        document.body.innerHTML = JSON.stringify(info, null, 4);
+    });
 }
 
 // Función para sacar foto
@@ -37,3 +48,6 @@ const takePicture = async (id) => {
     // Agrega la foto al src del elemento seleccionado
     image.src = imageUrl;
 };
+
+/* EJEMPLO PARA CHEQUAR SI ESTÁ FUNCIONANDO */
+
